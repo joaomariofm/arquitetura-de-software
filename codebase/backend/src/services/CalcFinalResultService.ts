@@ -1,10 +1,10 @@
-import { UserRepository } from '../repositories/UserRepository.js';
+// import { UserRepository } from '../repositories/UserRepository.js';
 import { CargosRepository } from '../repositories/CargosRepository.js';
 import { NotasEnemRepository } from '../repositories/NotasEnemRepository.js';
 
 export class CalcFinalResultService {
   async execute(processID: string) {
-    const userRepository = new UserRepository();
+    //  userRepository = new UserRepository();
     const cargosRepository = new CargosRepository();
     const notasEnemRepository = new NotasEnemRepository();
 
@@ -19,11 +19,11 @@ export class CalcFinalResultService {
       { L: 3, CH: 2.5, CN: 1, M: 1, R: 2.5 },
     ]
 
-    const users = await userRepository.getProcessUsers(processID);
+    // const users = await userRepository.getProcessUsers(processID);
 
     var resultados = []
 
-    for (var i = 0; i < users.length; i++) {
+    /* for (var i = 0; i < users.length; i++) {
       const cargoId = users[i].cargoId;
       const cargoGroup = (await cargosRepository.getCargoGroupById(cargoId)).grupo;
       const notaEnem = await notasEnemRepository.getNotaByProcessIdAndUserCpf(processID, users[i].cpf)
@@ -40,7 +40,7 @@ export class CalcFinalResultService {
 
         resultados.push({...users[i], notaFinal: notaFinal});
       }
-    }
+    } */
 
     return resultados.sort((a, b) => b.notaFinal - a.notaFinal);
   }

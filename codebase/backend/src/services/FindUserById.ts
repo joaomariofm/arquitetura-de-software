@@ -1,9 +1,11 @@
-import { UserRepository } from '../repositories/UserRepository.js';
+import { PrismaUsuarioRepository } from "../repositories/PrismaUsuarioRepository.js";
+import { DBClient } from "../entities/DBClient.js";
 
 export class FindUserById {
   async execute(id: string) {
-    const userRepository = new UserRepository();
+		const dbClient = DBClient.getInstance();
+		const prismaUsuarioRepository = new PrismaUsuarioRepository(dbClient.primsa);
 
-    return await userRepository.findUserById(id);
+    return await prismaUsuarioRepository.findUserById(id);
   }
 }

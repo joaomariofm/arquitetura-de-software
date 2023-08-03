@@ -1,9 +1,11 @@
-import { UserRepository } from '../repositories/UserRepository.js';
+import { DBClient } from "../entities/DBClient.js";
+import { PrismaUsuarioRepository } from "../repositories/PrismaUsuarioRepository.js";
 
 export class ListAnalystUsersService {
   async execute() {
-    const userRepository = new UserRepository();
+    const dbClient = DBClient.getInstance();
+    const prismaUsuarioRepository = new PrismaUsuarioRepository(dbClient.primsa);
 
-    return await userRepository.listAnalystUsers();
+		return await prismaUsuarioRepository.listAnalystUsers();
   }
 }

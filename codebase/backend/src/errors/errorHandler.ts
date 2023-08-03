@@ -1,12 +1,7 @@
 import { NextFunction, Request, Response, Errback } from "express";
 import { ApiErrors } from "./apiErrors.js";
 
-export function apiErrorHandler(
-  err: Errback,
-  request: Request,
-  response: Response,
-  next: NextFunction
-) {
+export function apiErrorHandler(err: Errback, request: Request, response: Response, next: NextFunction) {
   console.log(err);
 
   if (err instanceof ApiErrors) {

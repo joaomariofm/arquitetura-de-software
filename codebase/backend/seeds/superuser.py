@@ -26,7 +26,7 @@ conn = psycopg2.connect(
 
 cursor = conn.cursor()
 
-sql_query = """INSERT INTO "Usuarios" VALUES (DEFAULT, %s, %s, %s, %s)"""
+sql_query = """INSERT INTO "Usuario" VALUES (DEFAULT, %s, %s, %s, %s)"""
 
 password = hashlib.sha256('passme1234'.encode('utf-8')).hexdigest()
 
