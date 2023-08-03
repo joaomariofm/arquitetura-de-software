@@ -19,3 +19,4 @@ export class Programa {
 		this.categoriaIngresso = categoriaIngresso;
 	}
 }
+

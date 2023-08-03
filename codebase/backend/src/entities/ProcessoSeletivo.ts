@@ -31,3 +31,4 @@ export class ProcessoSeletivo {
 		this.etapa = etapa;
 	}
 }
+

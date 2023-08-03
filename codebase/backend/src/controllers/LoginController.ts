@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { LoginService } from '../services/LoginService.js';
+import { UsuarioService } from '../services/UsuarioService.js';
 import { ApiErrors } from '../errors/apiErrors.js';
 import jwt from 'jsonwebtoken';
 
@@ -12,7 +12,7 @@ interface User {
 
 class LoginController {
   static async handler(request: Request, response: Response, next: NextFunction) {
-    const loginService = new LoginService();
+		const usuarioService = new UsuarioService();
 
     const { email, password } = request.body;
 
@@ -20,7 +20,7 @@ class LoginController {
       if (!email || !password)
         throw new ApiErrors(400, 'required atribute is missing');
 
-      const user:User = await loginService.execute(email, password);
+      const user:User = await usuarioService.login(email, password);
       const token = jwt.sign({ email: user.email, role: user.role }, process.env.PRIVATE_KEY);
       user.token = token;
   

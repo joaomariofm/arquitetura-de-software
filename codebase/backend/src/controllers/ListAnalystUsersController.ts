@@ -1,12 +1,12 @@
 import { Request, Response, NextFunction } from 'express';
-import { ListAnalystUsersService } from '../services/ListAnalystUsersService.js';
+import { UsuarioService } from '../services/UsuarioService.js';
 
 class ListAnalystUsersController {
   static async handler(request: Request, response: Response, next: NextFunction) {
-    const listAnalystUsersService = new ListAnalystUsersService();
+		const usuarioService = new UsuarioService();
 
     try {
-      const users = await listAnalystUsersService.execute();
+      const users = await usuarioService.listAnalystUsuario();
       return response.status(200).json(users);
     } catch(err) {
       next(err);

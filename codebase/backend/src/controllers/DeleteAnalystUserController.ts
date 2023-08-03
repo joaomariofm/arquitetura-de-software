@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { DeleteUserService } from "../services/DeleteUserService.js";
-import { FindUserById } from "../services/FindUserById.js";
+import { UsuarioService } from "../services/UsuarioService.js";
 import { ApiErrors } from "../errors/apiErrors.js";
 
 class DeleteAnalystUserController {
@@ -9,13 +8,12 @@ class DeleteAnalystUserController {
     response: Response,
     next: NextFunction
   ) {
-    const deleteUserService = new DeleteUserService();
-    const findUserById = new FindUserById();
+		const usuarioService = new UsuarioService();
 
     const { id } = request.params;
 
     try {
-      const user = await findUserById.execute(id);
+      const user = await usuarioService.findUsuarioById(id);
 
       if (!user) {
         throw new ApiErrors(400, "invalid id");
@@ -24,7 +22,7 @@ class DeleteAnalystUserController {
       if (user.role === "ADMIN")
         throw new ApiErrors(401, "not allowed to delete an amdin user");
 
-      await deleteUserService.execute(id);
+      await usuarioService.deleteUsuario(id);
 
       return response
         .status(200)
@@ -36,3 +34,4 @@ class DeleteAnalystUserController {
 }
 
 export { DeleteAnalystUserController };
+
