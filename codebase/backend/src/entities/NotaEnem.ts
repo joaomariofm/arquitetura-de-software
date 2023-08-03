@@ -1,4 +1,4 @@
-export class Cargo {
+export class NotaEnem {
 	public readonly id: string;
 	public readonly numero: number;
 	public readonly notaCienciasNatureza: number;
