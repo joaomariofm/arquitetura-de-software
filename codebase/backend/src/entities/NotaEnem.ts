@@ -1,6 +1,7 @@
 export class NotaEnem {
 	public readonly id: string;
 	public readonly numero: string;
+	public readonly processoSeletivoId: string;
 	public readonly notaCienciasNatureza: number;
 	public readonly notaCienciasHumanas: number;
 	public readonly notaLinguagens: number;
@@ -11,6 +12,7 @@ export class NotaEnem {
 	constructor(
 		id: string,
 		numero: string,
+		processoSeletivoId: string,
 		notaCienciasNatureza: number,
 		notaCienciasHumanas: number,
 		notaLinguagens: number,
@@ -20,6 +22,7 @@ export class NotaEnem {
 	) {
 		this.id = id;
 		this.numero = numero;
+		this.processoSeletivoId = processoSeletivoId;
 		this.notaCienciasNatureza = notaCienciasNatureza;
 		this.notaCienciasHumanas = notaCienciasHumanas;
 		this.notaLinguagens = notaLinguagens;

@@ -1,7 +1,13 @@
+import { PrismaCandidatoRepository } from "../repositories/PrismaCandidatoRepository.js";
+import { DBClient } from "../entities/DBClient.js";
+
 export class ListProcessCpfsService {
   async execute(processID: string) {
-		console.log('temporarily unavailable');    
+		const dbClient = DBClient.getInstance();
+		const prismaCandidatoRepository = new PrismaCandidatoRepository(dbClient.primsa);
 
-		return [];
+		const cpfs = await prismaCandidatoRepository.getProcessCps(processID);
+
+		return cpfs;
   }
 }

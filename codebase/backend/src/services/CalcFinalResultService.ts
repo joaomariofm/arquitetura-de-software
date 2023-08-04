@@ -1,14 +1,14 @@
 import { DBClient } from '../entities/DBClient.js';
-import { PrismaUsuarioRepository } from '../repositories/PrismaUsuarioRepository.js';
 import { PrismaCargoRepository } from '../repositories/PrismaCargoRepository.js';
+import { PrismaCandidatoRepository } from '../repositories/PrismaCandidatoRepository.js';
 import { PrismaNotaEnemRepository } from '../repositories/PrismaNotaEnemResporitory.js';
 
 export class CalcFinalResultService {
   async execute(processID: string) {
 		const dbClient = DBClient.getInstance();
-		const prismaUsuarioRepository = new PrismaUsuarioRepository(dbClient.primsa);
 		const prismaCargoRepository = new PrismaCargoRepository(dbClient.primsa);
 		const prismaNotaEnemRepository = new PrismaNotaEnemRepository(dbClient.primsa);
+		const prismaCandidatoRepository = new PrismaCandidatoRepository(dbClient.primsa);
 
     const pesosPorGrupo = [
       { L: 2, CH: 1, CN: 2.5, M: 3, R: 1.5 },
@@ -21,14 +21,14 @@ export class CalcFinalResultService {
       { L: 3, CH: 2.5, CN: 1, M: 1, R: 2.5 },
     ]
 
-    // const users = await userRepository.getProcessUsers(processID);
+    const users = await prismaCandidatoRepository.getProcessCandidatos(processID);
 
     var resultados = []
 
-    /* for (var i = 0; i < users.length; i++) {
+    for (var i = 0; i < users.length; i++) {
       const cargoId = users[i].cargoId;
-      const cargoGroup = (await cargosRepository.getCargoGroupById(cargoId)).grupo;
-      const notaEnem = await notasEnemRepository.getNotaByProcessIdAndUserCpf(processID, users[i].cpf)
+      const cargoGroup = (await prismaCargoRepository.getCargoGroupById(cargoId)).grupo;
+      const notaEnem = await prismaNotaEnemRepository.getNotaByProcessIdAndUserCpf(processID, users[i].cpf)
 
       if (notaEnem) {
         const notaLinguagensComPeso = notaEnem.notaLinguagens * pesosPorGrupo[cargoGroup - 1].L;
@@ -42,7 +42,7 @@ export class CalcFinalResultService {
 
         resultados.push({...users[i], notaFinal: notaFinal});
       }
-    } */
+    }
 
     return resultados.sort((a, b) => b.notaFinal - a.notaFinal);
   }

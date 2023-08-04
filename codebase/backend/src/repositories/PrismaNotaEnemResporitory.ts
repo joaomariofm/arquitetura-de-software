@@ -18,6 +18,7 @@ export class PrismaNotaEnemRepository implements NotaEnemRepository {
 		return new NotaEnem(
 			notaEnem.id,
 			notaEnem.numero,
+			notaEnem.processoSeletivoId,
 			notaEnem.notaCienciasNatureza,
 			notaEnem.notaCienciasHumanas,
 			notaEnem.notaLinguagens,

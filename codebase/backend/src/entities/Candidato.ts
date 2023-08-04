@@ -1,6 +1,10 @@
 export class Candidato {
 	public readonly id: string;
 	public readonly cpf: string;
+	public readonly cargoId: number;
+	public readonly notaEnemId: string;
+	public readonly notaVhceId: string;
+	public readonly processoSeletivoId: string;
 	public readonly numCandidato: string;
 	public readonly corRaca: number;
 	public readonly formacaoEscolaPublica: boolean;
@@ -14,6 +18,10 @@ export class Candidato {
 	constructor(
 		id: string,
 		cpf: string,
+		cargoId: number,
+		notaEnemId: string,
+		notaVhceId: string,
+		processoSeletivoId: string,
 		numCandidato: string,
 		corRaca: number,
 		formacaoEscolaPublica: boolean,
@@ -26,6 +34,10 @@ export class Candidato {
 	) {
 		this.id = id;
 		this.cpf = cpf;
+		this.cargoId = cargoId;
+		this.notaEnemId = notaEnemId;
+		this.notaVhceId = notaVhceId;
+		this.processoSeletivoId = processoSeletivoId;
 		this.numCandidato = numCandidato;
 		this.corRaca = corRaca;
 		this.formacaoEscolaPublica = formacaoEscolaPublica;

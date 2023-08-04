@@ -15,7 +15,7 @@ class ListProcessCpfsController {
       var cpfs = '';
 
       for (var i = 0; i < res.length; i++) {
-        cpfs = cpfs.concat(res[i].cpf, ',');
+        cpfs = cpfs.concat(res[i], ',');
       }
       
       fs.writeFileSync(`./src/tmp/${processID}.txt`, cpfs);
