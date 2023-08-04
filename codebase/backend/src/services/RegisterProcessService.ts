@@ -1,15 +1,17 @@
-import { ProcessosSeletivosRepository } from '../repositories/ProcessosSeletivosRepository.js';
 import { ApiErrors } from '../errors/apiErrors.js';
+import { DBClient } from '../entities/DBClient.js';
+import { PrismaProcessoSeletivoRepository } from '../repositories/PrismaProcessoSeletivoRepository.js';
 
 export class RegisterProcessService {
   async execute(ano: number, inicio: string, termino: string) {
-    const processosSeletivosRepository = new ProcessosSeletivosRepository();
+		const dbClient = DBClient.getInstance();
+		const prismaProcessosSeletivosRepository = new PrismaProcessoSeletivoRepository(dbClient.primsa);
 
-    const isInUse = await processosSeletivosRepository.checkYearAvailability(ano);
+    const isInUse = await prismaProcessosSeletivosRepository.checkYearAvailability(ano);
 
     if (isInUse) 
       throw new ApiErrors(400, 'there is already a process registered in this year');
 
-    return processosSeletivosRepository.register(ano, inicio, termino);
+    return prismaProcessosSeletivosRepository.register(ano, inicio, termino);
   }
 }

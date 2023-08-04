@@ -1,9 +1,12 @@
-import { ProcessosSeletivosRepository } from '../repositories/ProcessosSeletivosRepository.js';
+import { DBClient } from "../entities/DBClient.js";
+import { PrismaProcessoSeletivoRepository } from "../repositories/PrismaProcessoSeletivoRepository.js";
 
 export class AlterProcessStep {
   async execute(step: number, processID: string) {
-    const processosSeletivosRepository = new ProcessosSeletivosRepository();
+		const dbClient = DBClient.getInstance();
+		const prismaProcessosSeletivosRepository = new PrismaProcessoSeletivoRepository(dbClient.primsa);
 
-    return await processosSeletivosRepository.changeProcessStep(step, processID);
+    return await prismaProcessosSeletivosRepository.changeProcessStep(step, processID);
   }
 }
+

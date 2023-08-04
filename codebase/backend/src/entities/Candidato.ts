@@ -1,16 +1,6 @@
-import { Cargo } from "./Cargo.js";
-import { NotaEnem } from "./NotaEnem.js";
-import { NotaVhce } from "./NotaVhce.js";
-
 export class Candidato {
 	public readonly id: string;
 	public readonly cpf: string;
-	public readonly cargoId: string;
-	public readonly cargo: Cargo;
-	public readonly notaEnemId: string;
-	public readonly notaEnem: NotaEnem;
-	public readonly notaVhceId: string;
-	public readonly notaVhce: NotaVhce;
 	public readonly numCandidato: string;
 	public readonly corRaca: number;
 	public readonly formacaoEscolaPublica: boolean;
@@ -24,12 +14,6 @@ export class Candidato {
 	constructor(
 		id: string,
 		cpf: string,
-		cargoId: string,
-		cargo: Cargo,
-		notaEnemId: string,
-		notaEnem: NotaEnem,
-		notaVhceId: string,
-		notaVhce: NotaVhce,
 		numCandidato: string,
 		corRaca: number,
 		formacaoEscolaPublica: boolean,
@@ -42,12 +26,6 @@ export class Candidato {
 	) {
 		this.id = id;
 		this.cpf = cpf;
-		this.cargoId = cargoId;
-		this.cargo = cargo;
-		this.notaEnemId = notaEnemId;
-		this.notaEnem = notaEnem;
-		this.notaVhceId = notaVhceId;
-		this.notaVhce = notaVhce;
 		this.numCandidato = numCandidato;
 		this.corRaca = corRaca;
 		this.formacaoEscolaPublica = formacaoEscolaPublica;
