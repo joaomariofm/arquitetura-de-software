@@ -1,6 +1,6 @@
 export class NotaEnem {
 	public readonly id: string;
-	public readonly numero: number;
+	public readonly numero: string;
 	public readonly notaCienciasNatureza: number;
 	public readonly notaCienciasHumanas: number;
 	public readonly notaLinguagens: number;
@@ -10,7 +10,7 @@ export class NotaEnem {
 
 	constructor(
 		id: string,
-		numero: number,
+		numero: string,
 		notaCienciasNatureza: number,
 		notaCienciasHumanas: number,
 		notaLinguagens: number,

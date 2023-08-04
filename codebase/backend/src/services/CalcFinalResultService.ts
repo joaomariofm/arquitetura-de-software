@@ -1,12 +1,14 @@
-// import { UserRepository } from '../repositories/UserRepository.js';
-import { CargosRepository } from '../repositories/CargosRepository.js';
-import { NotasEnemRepository } from '../repositories/NotasEnemRepository.js';
+import { DBClient } from '../entities/DBClient.js';
+import { PrismaUsuarioRepository } from '../repositories/PrismaUsuarioRepository.js';
+import { PrismaCargoRepository } from '../repositories/PrismaCargoRepository.js';
+import { PrismaNotaEnemRepository } from '../repositories/PrismaNotaEnemResporitory.js';
 
 export class CalcFinalResultService {
   async execute(processID: string) {
-    //  userRepository = new UserRepository();
-    const cargosRepository = new CargosRepository();
-    const notasEnemRepository = new NotasEnemRepository();
+		const dbClient = DBClient.getInstance();
+		const prismaUsuarioRepository = new PrismaUsuarioRepository(dbClient.primsa);
+		const prismaCargoRepository = new PrismaCargoRepository(dbClient.primsa);
+		const prismaNotaEnemRepository = new PrismaNotaEnemRepository(dbClient.primsa);
 
     const pesosPorGrupo = [
       { L: 2, CH: 1, CN: 2.5, M: 3, R: 1.5 },

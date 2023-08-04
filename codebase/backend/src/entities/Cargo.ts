@@ -1,5 +1,5 @@
 export class Cargo {
-	public readonly id: string;
+	public readonly id: number;
 	public readonly coIesCurso: number;
 	public readonly desc: string;
 	public readonly grauAcademico: string;
@@ -11,7 +11,7 @@ export class Cargo {
 	public readonly campus: string;
 
 	constructor(
-		id: string,
+		id: number,
 		coIesCurso: number,
 		desc: string,
 		grauAcademico: string,
