@@ -3,32 +3,28 @@ import { PrismaUsuarioRepository } from "../repositories/PrismaUsuarioRepository
 import { ApiErrors } from "../errors/apiErrors.js";
 
 export class UsuarioService {
-  async deleteUsuario(id: string) {
-		const dbClient = DBClient.getInstance();
-		const prismaUsuarioRepository = new PrismaUsuarioRepository(dbClient.primsa);
+	private dbClient: DBClient;
+	private prismaUsuarioRepository: PrismaUsuarioRepository;
 
-    return await prismaUsuarioRepository.deleteUser(id);
+	constructor() {
+		this.dbClient = DBClient.getInstance();
+		this.prismaUsuarioRepository = new PrismaUsuarioRepository(this.dbClient.primsa);
+	}
+
+  async deleteUsuario(id: string) {
+    return await this.prismaUsuarioRepository.deleteUser(id);
   }
 	
 	async findUsuarioById(id: string) {
-		const dbClient = DBClient.getInstance();
-		const prismaUsuarioRepository = new PrismaUsuarioRepository(dbClient.primsa);
-
-    return await prismaUsuarioRepository.findUserById(id);
+    return await this.prismaUsuarioRepository.findUserById(id);
   }
 
 	async listAnalystUsuario() {
-    const dbClient = DBClient.getInstance();
-    const prismaUsuarioRepository = new PrismaUsuarioRepository(dbClient.primsa);
-
-		return await prismaUsuarioRepository.listAnalystUsers();
+		return await this.prismaUsuarioRepository.listAnalystUsers();
   }
 
 	async login(email: string, password: string) {
-		const dbClient = DBClient.getInstance();
-		const prismaUserRepository = new PrismaUsuarioRepository(dbClient.primsa);
-
-    const user = await prismaUserRepository.findByEmailAndPassword(email, password);
+    const user = await this.prismaUsuarioRepository.findByEmailAndPassword(email, password);
 
     if (!user) throw new ApiErrors(400, 'wrong email or password');
 
@@ -36,15 +32,12 @@ export class UsuarioService {
   }
 
 	async registerUsuario(email: string, password: string, name: string) {
-		const dbClient = DBClient.getInstance();
-		const prismaUserRepository = new PrismaUsuarioRepository(dbClient.primsa);
-
-    const emailIsInUse = await prismaUserRepository.checkEmailAvailability(email);
+    const emailIsInUse = await this.prismaUsuarioRepository.checkEmailAvailability(email);
 
     if (emailIsInUse)
       throw new ApiErrors(406, 'email is already in use');
 
-    return prismaUserRepository.registerUser(email, password, name);
+    return this.prismaUsuarioRepository.registerUser(email, password, name);
   }
 }
 
