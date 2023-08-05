@@ -47,3 +47,4 @@ export class CalcFinalResultService {
     return resultados.sort((a, b) => b.notaFinal - a.notaFinal);
   }
 }
+
