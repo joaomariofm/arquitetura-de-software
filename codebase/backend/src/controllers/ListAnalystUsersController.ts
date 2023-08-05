@@ -15,3 +15,4 @@ class ListAnalystUsersController {
 }
 
 export { ListAnalystUsersController }
+

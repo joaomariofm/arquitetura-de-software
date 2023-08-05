@@ -32,3 +32,4 @@ class LoginController {
 }
 
 export { LoginController };
+

@@ -22,3 +22,4 @@ class RegisterProcessController {
 }
 
 export { RegisterProcessController };
+

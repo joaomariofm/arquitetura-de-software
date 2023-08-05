@@ -22,3 +22,4 @@ class RegisterUserController {
 }
 
 export { RegisterUserController };
+
