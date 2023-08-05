@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
-import { RegisterProcessService } from '../services/RegisterProcessService.js';
+import { ProcessoSeletivoService } from '../services/ProcessoSeletivoService.js';
 import { ApiErrors } from '../errors/apiErrors.js';
 
 class RegisterProcessController {
   static async handler(request: Request, response: Response, next: NextFunction) {
-    const registerProcessService = new RegisterProcessService();
+    const processoSeletivoService = new ProcessoSeletivoService();
 
     const { ano, inicio, termino } = request.body;
 
@@ -12,7 +12,7 @@ class RegisterProcessController {
       if (!ano || !inicio || !termino)
         throw new ApiErrors(400, 'required atribute is missing');
 
-      await registerProcessService.execute(Number(ano), inicio, termino);
+      await processoSeletivoService.registerProcessoSeletivo(Number(ano), inicio, termino);
 
       return response.status(200).json({ message: 'new process successfully registered'});
     } catch (err) {

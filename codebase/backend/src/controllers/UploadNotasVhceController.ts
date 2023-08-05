@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from "express";
 import { UploadVhceService } from "../services/UploadVhceService.js";
 import { WriteOdsFileService } from "../services/WriteOdsFileService.js";
-import { VerifyProcessId } from "../services/VerifyProcessId.js";
 import { DeleteOdsFileService } from "../services/DeleteOdsFileService.js";
-import { AlterProcessStep } from "../services/AlterProcessStep.js";
+
+import { ProcessoSeletivoService } from "../services/ProcessoSeletivoService.js";
 
 class UploadNotasVhceController {
   static async handler(
@@ -11,8 +11,7 @@ class UploadNotasVhceController {
     response: Response,
     next: NextFunction
   ) {
-    const verifyProcessId = new VerifyProcessId();
-    const alterProcessStep = new AlterProcessStep();
+		const processoSeletivoService = new ProcessoSeletivoService();
     const uploadVhceService = new UploadVhceService();
     const writeOdsFileService = new WriteOdsFileService();
     const deleteOdsFileService = new DeleteOdsFileService();
@@ -24,13 +23,13 @@ class UploadNotasVhceController {
 
     try {
       // verify processID validity
-      await verifyProcessId.execute(processID);
+      await processoSeletivoService.verifyProcessId(processID);
 
       // upload notas vhce table
       await uploadVhceService.execute(fileId, processID);
 
       // update process step
-      const processData = await alterProcessStep.execute(4, processID);
+      const processData = await processoSeletivoService.alterProcessoStep(4, processID);
 
       return response.status(200).json({
         message: "NotasVhce table updated",

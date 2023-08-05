@@ -2,13 +2,12 @@ import { Request, Response, NextFunction } from 'express';
 import { WriteOdsFileService } from '../services/WriteOdsFileService.js';
 import { UploadNotasEnemService } from '../services/UploadNotasEnemService.js';
 import { DeleteOdsFileService } from '../services/DeleteOdsFileService.js';
-import { VerifyProcessId } from '../services/VerifyProcessId.js';
-import { AlterProcessStep } from '../services/AlterProcessStep.js';
+
+import { ProcessoSeletivoService } from '../services/ProcessoSeletivoService.js';
 
 class UploadNotasEnemController {
   static async handler(request: Request, response: Response, next: NextFunction) {
-    const verifyProcessId = new VerifyProcessId();
-    const alterProcessStep = new AlterProcessStep();
+		const processoSeletivoService = new ProcessoSeletivoService();
     const writeOdsFileService = new WriteOdsFileService();
     const deleteOdsFileService = new DeleteOdsFileService();
     const uploadNotasEnemService = new UploadNotasEnemService();
@@ -20,13 +19,13 @@ class UploadNotasEnemController {
 
     try {
       // verify processID validity
-      await verifyProcessId.execute(processID);
+      await processoSeletivoService.verifyProcessId(processID);
 
       // upload notasenem table
       await uploadNotasEnemService.execute(fileId, processID);
 
       // update process step
-      const processData = await alterProcessStep.execute(3, processID);
+      const processData = await processoSeletivoService.alterProcessoStep(3, processID);
 
       return response.status(200).json({
         message: 'NotasEnem table updated',

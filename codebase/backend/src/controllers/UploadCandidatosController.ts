@@ -2,13 +2,11 @@ import { Request, Response, NextFunction } from 'express';
 import { WriteOdsFileService } from '../services/WriteOdsFileService.js';
 import { UploadCandidatosService } from '../services/UploadCandidatosService.js';
 import { DeleteOdsFileService } from '../services/DeleteOdsFileService.js';
-import { VerifyProcessId } from '../services/VerifyProcessId.js';
-import { AlterProcessStep } from '../services/AlterProcessStep.js';
+import { ProcessoSeletivoService } from '../services/ProcessoSeletivoService.js';
 
 class UploadCandidatosController {
   static async handler(request: Request, response: Response, next: NextFunction) {
-    const verifyProcessId = new VerifyProcessId();
-    const alterProcessStep = new AlterProcessStep();
+		const processoSeletivoService = new ProcessoSeletivoService();
     const writeOdsFileService = new WriteOdsFileService();
     const deleteOdsFileService = new DeleteOdsFileService();
     const uploadCandidatosService = new UploadCandidatosService();
@@ -20,13 +18,13 @@ class UploadCandidatosController {
 
     try {
       // verify processID validity
-      await verifyProcessId.execute(processID);
+      await processoSeletivoService.verifyProcessId(processID);
 
       // upload candidatos table
       await uploadCandidatosService.execute(fileId, processID); 
 
       // update process step
-      const processData = await alterProcessStep.execute(2, processID);
+      const processData = await processoSeletivoService.alterProcessoStep(2, processID);
 
       return response.status(200).json({
         message: 'Candidatos table updated',
