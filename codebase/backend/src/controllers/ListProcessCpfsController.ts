@@ -1,16 +1,16 @@
 import { Request, Response, NextFunction } from 'express';
-import { ListProcessCpfsService } from '../services/ListProcessCpfsService.js';
+import { CandidatoService } from '../services/CandidatoService.js';
 import fs from 'fs';
 import { resolve } from 'path';
 
 class ListProcessCpfsController {
   static async handler(request: Request, response: Response, next: NextFunction) {
-    const listProcessCpfsService = new ListProcessCpfsService();
+    const candidatoService = new CandidatoService();
 
     const { processID } = request.body;
 
     try {
-      const res = await listProcessCpfsService.execute(processID);
+      const res = await candidatoService.listCpfsByProcessId(processID);
 
       var cpfs = '';
 

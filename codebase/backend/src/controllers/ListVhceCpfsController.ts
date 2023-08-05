@@ -1,16 +1,16 @@
 import { Request, Response, NextFunction } from 'express';
-import { ListVhceCpfsService } from '../services/ListVhceCpfsService.js';
+import { CandidatoService } from '../services/CandidatoService.js';
 import fs from 'fs';
 import { resolve } from 'path';
 
 class ListVhceCpfsController {
   static async handler(request: Request, response: Response, next: NextFunction) {
-    const listVhceCpfsService = new ListVhceCpfsService();
+    const candidatoService = new CandidatoService();
 
     const { processID } = request.body;
 
     try {
-      const res = await listVhceCpfsService.execute(processID);
+      const res = await candidatoService.listVhceCpfsByProcessId(processID);
   
       var cpfs = '';
 
